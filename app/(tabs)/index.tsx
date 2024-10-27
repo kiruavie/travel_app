@@ -1,18 +1,66 @@
-import { Text, View } from "react-native";
-import React, { Component } from "react";
+import React from "react";
+import { Stack } from "expo-router";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import { useHeaderHeight } from "@react-navigation/elements";
 
-export default class index extends Component {
-  render() {
-    return (
-      <View
-        style={{
-          flex: 1,
-          justifyContent: "center",
-          alignItems: "center",
+const index = () => {
+  const headerHeight = useHeaderHeight();
+  return (
+    <>
+      <Stack.Screen
+        options={{
+          headerTransparent: true,
+          headerTitle: "",
+          headerLeft: () => (
+            <TouchableOpacity onPress={() => {}} style={{ marginLeft: 20 }}>
+              <Image
+                source={{
+                  uri: "https://xsgames.co/randomusers/avatar.php?g=male",
+                }}
+                style={{ width: 40, height: 40, borderRadius: 10 }}
+              />
+            </TouchableOpacity>
+          ),
+
+          headerRight: () => (
+            <TouchableOpacity
+              onPress={() => {}}
+              style={{
+                marginRight: 20,
+                backgroundColor: "white",
+                padding: 10,
+                borderRadius: 10,
+                shadowColor: "#171717",
+                shadowOffset: { width: 2, height: 4 },
+                shadowOpacity: 0.2,
+                shadowRadius: 3,
+              }}
+            >
+              <Ionicons name="notifications" size={24} color="black" />
+            </TouchableOpacity>
+          ),
         }}
-      >
-        <Text>index</Text>
+      ></Stack.Screen>
+      <View style={[styles.container, { paddingTop: headerHeight }]}>
+        <Text style={styles.headingText}>Explore the beautiful world</Text>
       </View>
-    );
-  }
-}
+    </>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingHorizontal: 20,
+    backgroundColor: "white",
+  },
+  headingText: {
+    fontSize: 28,
+    fontWeight: "800",
+    color: "black",
+    marginTop: 10,
+  },
+});
+
+export default index;
